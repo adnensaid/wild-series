@@ -32,7 +32,8 @@ class ProgramController extends AbstractController
                 'No program with id : ' . $id . ' found in program\'s table.'
             );
         }
-
+        //$program->getCategory()->getName();
+        //dd($program->getCategory());
         return $this->render('program/show.html.twig', ['program' => $program]);
     }
 }

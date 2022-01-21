@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Program;
+use App\Repository\ProgramRepository;
 
 class ProgramController extends AbstractController
 {
@@ -13,15 +13,12 @@ class ProgramController extends AbstractController
      * @Route("/program/", name="program_index")
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(ProgramRepository $programRepository): Response
     {
-        $programs = $this->getDoctrine()
-        ->getRepository(Program::class)
-        ->findAll();
 
         return $this->render(
              'program/index.html.twig',
-             ['programs' => $programs]
+             ['programs' => $programRepository->findAll()]
          );    
     }
 

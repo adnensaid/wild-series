@@ -27,7 +27,6 @@ class ProgramController extends AbstractController
     public function show(int $id, ProgramRepository $programRepository): Response
     {
         $program = $programRepository->findOneBy(['id'=>$id]);
-
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with id : ' . $id . ' found in program\'s table.'

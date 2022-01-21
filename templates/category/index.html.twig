@@ -14,7 +14,7 @@
     <h1>Toutes les séries de la table program : </h1>
     {% for category in categories %}
         <div>
-            <p>{{ category.name }}</p>
+            <a href="{{ path('category_show',{ categoryName:category.name }) }}">{{ category.name }}</a>
         </div>
     {% else %}
         Aucune categories trouvée.

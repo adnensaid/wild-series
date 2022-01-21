@@ -2,49 +2,46 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
+use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Category;
-use App\Entity\Program;
-use Gitonomy\Git\Repository;
 
+/**
+ * @Route("/category", name="category_")
+ */
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/", name="category_index")
+     * @Route("/", name="index")
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(CategoryRepository $categoryRepository): Response
     {
-        $categories = $this->getDoctrine()
-        ->getRepository(Category::class)
-        ->findAll();
-
         return $this->render(
              'category/index.html.twig',
-             ['categories' => $categories]
+             ['categories' => $categoryRepository
+             ->findAll()]
          );    
     }
 
     /**
-     * @Route("/category/{categoryName}",methods={"GET"}, name="category_show")
+     * @Route("/{categoryName}",methods={"GET"}, name="show")
      */
-    public function show(string $categoryName): Response
+    public function show(string $categoryName, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
     {
-        $category = $this->getDoctrine()
-        ->getRepository((Category::class))
+        $category = $categoryRepository
         ->findOneBy(['name'=>$categoryName]);
 
         if (!$category) {
             throw $this->createNotFoundException(
-                'No category w—ith name : '.$category.' found in category table.'
+                'No category with name : '.$category.' found in category table.'
             );
         }
         
-        $programs = $this->getDoctrine()
-        ->getRepository((Program::class))
-        ->findBy(['category'=> $category], ['id' => 'DESc'], 3);
+        $programs = $programRepository
+        ->findBy(['category'=> $category], ['id' => 'DESC'], 3);
         return $this->render('category/show.html.twig', ['programs' => $programs]);
     }
 }

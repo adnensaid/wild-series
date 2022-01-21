@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Program;
-use Gitonomy\Git\Repository;
 
 class ProgramController extends AbstractController
 {
@@ -14,7 +13,7 @@ class ProgramController extends AbstractController
      * @Route("/program/", name="program_index")
      * @return Response A response instance
      */
-    public function index(Repository ): Response
+    public function index(): Response
     {
         $programs = $this->getDoctrine()
         ->getRepository(Program::class)
@@ -38,7 +37,6 @@ class ProgramController extends AbstractController
             throw $this->createNotFoundException(
                 'No program with id : '.$id.' found in program\'s table.'
             );
-        }        
         return $this->render('program/show.html.twig', ['program' => $program]);
     }
 }

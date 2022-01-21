@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/{categoryName}",methods={"GET"}, name="category_show")
      */
-    public function show(string $categoryName ): Response
+    public function show(string $categoryName): Response
     {
         $category = $this->getDoctrine()
         ->getRepository((Category::class))

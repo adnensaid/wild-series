@@ -1,0 +1,12 @@
+{# component/_navbar.html.twig #}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="{{ path('app_index') }}" class="navbar-brand">Homepage</a>
+        <a href="{{ path('program_index') }}" class="navbar-brand">Programs</a>
+        <a href="{{ path('category_index') }}" class="navbar-brand">Categories</a>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

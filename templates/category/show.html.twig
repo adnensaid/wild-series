@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for program in programs %}
+    <h1> Serie: {{ program.id }} </h1>
+    <p> {{ program.title }}</p>
+    <p> {{ program.summary }} </p>
+    {% endfor %}
+
+    <a href="{{ path('category_index') }}">
+        Retour à la liste des categories
+    </a>
+{% endblock %}
